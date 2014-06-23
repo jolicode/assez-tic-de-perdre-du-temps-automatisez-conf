@@ -1,0 +1,1323 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Tools pour ne plus perdre de temps - PHP Tour Lyon 2014</title>
+
+    <meta name="description" content="Less, Sass, Stylus, Assetic, Grunt, Gulp">
+    <meta name="author" content="JoliCode">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/jolicode.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h2>Assez(tic) de perdre du temps,</h2>
+            <h3> automatisez ! Grrr !</h3>
+            <p>
+                <small>Présentation par <a href="http://twitter.com/_clairecoloma" target="_blank">Claire Coloma</a> / <a href="http://jolicode.com" target="_blank">JoliCode</a></small>
+            </p>
+        </section>
+
+        <section>
+            <h2>Claire COLOMA</h2>
+            <ul>
+                <li>Étudiante en développement mobile à l'ESGI (Paris)</li>
+                <li>Développeuse Web et Mobile à JoliCode</li>
+            </ul>
+
+            <p style="margin-top:60px; text-align:left; margin-left:60px;"><a href="http://twitter.com/@_ClaireColoma"><img src="images/twitter_logo.png" width="100px" />@_ClaireColoma</a></p>
+        </section>
+
+        <section data-state="jolistate">
+            <a class="" href="http://jolicode.com">
+                <img src="./lib/font/logo-fond-noir.svg" alt="JoliCode" />
+            </a>
+            <aside class="notes">Je suis apprentie chez JoliCode, on me donne le temps de faire un code de qualité, de faire des recherches en ce sens, et de concevoir un projet de façon plus productive. Je vais donc vous expliquer ce que j'ai appris et les outils que j'utilise et que je préconise.</aside>
+        </section>
+
+        <section>
+            <h2>Nous allons voir : </h2>
+            <ol>
+                <li>Les surlangages à utiliser
+                    <ul>
+                        <li>Les préprocesseurs CSS</li>
+                        <li >Les surlangages JavaScript</li>
+                    </ul>
+                </li>
+                <li>Les outils d'automatisation
+                    <ul>
+                        <li>Assetic</li>
+                        <li>Grunt</li>
+                        <li>Gulp</li>
+                        <li>Bower</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Un projet PHP est composé de :</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JS</li>
+                <li>PHP</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Les problématiques front</h2>
+            <ul>
+                <div class="col-2">
+                <li>Performance
+                    <ul>
+                        <li>Minifier</li>
+                        <li>Concaténer</li>
+                        <li>Minimiser le nombre de requêtes</li>
+                    </ul>
+                </li>
+                <li class="fragment">Maintenance
+                    <ul><li>Découplage de fichiers</li></ul>
+                </li>
+                </div>
+                <div class="col-2">
+                <li class="fragment" style="margin-left:27px;">Nouvelles fonctionnalités
+                    <ul>
+                        <li>Bootstrap</li>
+                        <li>Le templating</li>
+                        <li>Angular</li>
+                        <li>etc.</li>
+                    </ul>
+                </li>
+                </div>
+            </ul>
+
+            <aside class="notes">
+                Cette structure de projet présente certaines problématiques qui sont :
+                - des besoins en performance
+                Toutes ces fonctionnalités comportent beaucoup de fichiers et donc beaucoup de requêtes
+            </aside>
+
+        </section>
+
+        <section>
+            <h2>Pourquoi utiliser des préprocesseurs CSS ?</h2>
+            <ul>
+                <li>Code dynamique</li>
+                <li>Réutilisabilité du code</li>
+                <li>Simplicité du code</li>
+                <li>Meilleure maintenabilité</li>
+            </ul>
+            <aside class="notes">
+                C'est là qu'interviennent les préprocesseurs CSS, qui permettent ...
+            </aside>
+        </section>
+
+        <section>
+                <h2>I. Les surlangages à utiliser</h2>
+        </section>
+
+        <section>
+            <h2>A. Les préprocesseurs CSS</h2>
+            <div class="col-3"> <img class="none logo" src="images/less_logo.png" alt="Less" /></div>
+            <div class="col-3"> <img class="none logo" src="images/sass_logo.png" alt="Sass" /></div>
+            <div class="col-3"> <img class="none logo" src="images/stylus_logo.png" alt="Stylus" /></div>
+        </section>
+
+        <section>
+            <h2>1. Fonctionnalités</h2>
+        </section>
+        <section>
+            <h3>Variables</h3>
+            <p class="sass-color">Scss</p>
+            <pre><code>
+$primary-color : #cc6699;
+            </code></pre>
+            <p class="less-color">Less</p>
+            <pre><code>
+@primary-color : #5d83a3;
+            </code></pre>
+            <p class="stylus-color">Stylus</p>
+            <pre><code>
+primary-color = #b3d107
+// or
+$primary-color = #b3d107
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Mixins</h3>
+            <p class="sass-color">Scss</p>
+            <img src="images/preprocesseurs/arrows_mixins.png" style="position:absolute; z-index:1; left:-40px; top:152px;">
+            <pre><code>@mixin error($borderWidth: 2px) {
+  border: $borderWidth solid #F00;
+  color: #F00;
+}
+
+.generic-error {
+  padding: 20px;
+  margin: 4px;
+  @include error();
+}
+.login-error {
+  left: 12px;
+  position: absolute;
+  top: 20px;
+  @include error(5px);
+}</code></pre>
+            <aside class="notes">
+            La mixin error prend un argument optionnel qui est ici $borderWidth valant par défaut 2px
+            En Scss on utilise l’instruction @mixin pour déclarer notre “fonction” et on y fait appel avec l’instruction @include.
+            </aside>
+
+        </section>
+        <section>
+            <h3>Mixins</h3>
+            <p class="less-color">Less</p>
+            <img src="images/preprocesseurs/arrows_mixins.png" style="position:absolute; z-index:1; left:-40px; top:152px;">
+            <pre><code>.error(@borderWidth: 2px) {
+  border: @borderWidth solid #F00;
+  color: #F00;
+}
+
+.generic-error {
+  padding: 20px;
+  margin: 4px;
+  .error();
+}
+.login-error {
+  left: 12px;
+  position: absolute;
+  top: 20px;
+  .error(5px);
+}</code></pre>
+            <aside class="notes">
+                En LESS on utilise plutôt les sélecteur de classe
+            </aside>
+        </section>
+
+        <section>
+            <h3>Mixins</h3>
+            <img src="images/preprocesseurs/arrows_mixins.png" style="position:absolute; z-index:1; left:-40px; top:152px;">
+            <p class="stylus-color">Stylus</p>
+            <pre><code>error(borderWidth= 2px) {
+  border: borderWidth solid #F00;
+  color: #F00;
+}
+
+.generic-error {
+  padding: 20px;
+  margin: 4px;
+  error();
+}
+.login-error {
+  left: 12px;
+  position: absolute;
+  top: 20px;
+  error(5px);
+}</code></pre>
+            <aside class="notes">
+                En Stylus les mixins se créent de la même façon que l’on crée une fonction en PHP
+            </aside>
+        </section>
+
+        <section>
+            <h3>Héritage</h3>
+            <div class="col-2">
+            <p><span class="sass-color">Scss</span> / <span class="stylus-color">Stylus</span></p>
+            <img src="images/preprocesseurs/arrows_heritage_stylus-sass.png" style="position:absolute; z-index:1; left:-50px; top:142px;">
+            <pre><code class="contentEditable">.block {
+  margin: 10px 5px;
+  padding: 2px;
+}
+
+p {
+  @extend .block;
+  border: 1px solid #EEE;
+}
+ul, ol {
+  @extend .block;
+  color: #333;
+  text-transform: uppercase;
+}</code></pre>
+                        </div>
+                        <div class="col-2">
+                        <p>Rendu CSS</p>
+                        <pre><code>.block, p, ul, ol {
+  margin: 10px 5px;
+  padding: 2px;
+}
+p {
+  border: 1px solid #EEE;
+}
+ul, ol {
+  color: #333;
+  text-transform: uppercase;
+}</code></pre>
+            </div>
+
+            <aside class="notes">
+                Scss et Stylus utilise l’instruction @extends pour récupérer un bloc d’instruction -
+                p et ul, ol héritent des styles de '.block'
+            </aside>
+        </section>
+
+        <section>
+            <h3>Héritage</h3>
+            <div class="col-2">
+            <img src="images/preprocesseurs/arrows_heritage_less.png" style="position:absolute; z-index:1; left:-45px; top:147px;">
+            <p class="less-color">LESS</p>
+            <pre><code class="contentEditable">.block {
+  margin: 10px 5px;
+  padding: 2px;
+}
+
+p {
+  .block;
+  border: 1px solid #EEE;
+}
+ul, ol {
+  .block;
+  color: #333;
+  text-transform: uppercase;
+}</code></pre>
+            </div>
+            <div class="col-2">
+            <p>Rendu CSS</p>
+            <pre><code>.block {
+  margin: 10px 5px;
+  padding: 2px;
+}
+p {
+  margin: 10px 5px;
+  padding: 2px;
+  border: 1px solid #EEE;
+}
+ul,
+ol {
+  margin: 10px 5px;
+  padding: 2px;
+  color: #333;
+  text-transform: uppercase;
+}</code></pre>
+            </div>
+
+            <aside class="notes">
+                Quant à LESS, cette fonctionnalité n’existe pas et on utilise à la place les mixins.
+                Le rendu CSS est moins performant
+            </aside>
+        </section>
+
+        <section>
+            <h2>Structure</h2>
+            <div class="col-2">
+                <p>CSS</p>
+                <pre><code>nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}</code></pre>
+            </div>
+            <div class="col-2">
+                <p>
+                    <span class="sass-color">Scss</span> /
+                    <span class="less-color">LESS</span> /
+                    <span class="stylus-color">Stylus</span>
+                </p>
+                <pre><code>nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}</code></pre>
+                        </div>
+            <aside class="notes">
+                On obtient un code plus lisible, et donc plus facilement maintenable
+            </aside>
+        </section>
+
+
+        <section>
+            <h2>2. Compilation</h2>
+            <p class="sass-color">Sass</p>
+            <pre><code>
+$ sass input.scss output.css
+            </code></pre>
+            <p class="less-color">LESS</p>
+            <pre><code>
+$ lessc input.less output.css
+            </code></pre>
+            <p class="stylus-color">Stylus</p>
+            <pre><code>
+$ stylus < input.styl > output.css
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Les options de compilation : watch</h3>
+            <ul><li>Compiler automatiquement à chaque enregistrement d'une modification</li></ul>
+            <p class="sass-color">Sass</p>
+            <pre><code>
+$ sass --watch input.scss:output.css
+            </code></pre>
+            <p class="stylus-color">Stylus</p>
+            <pre><code>
+$ stylus --watch < input.styl > output.css
+            </code></pre>
+
+            <aside class="notes">
+                Malheureusement LESS ne dispose pas de cette fonctionnalité
+            </aside>
+        </section>
+
+        <section>
+            <h3>Les options de compilation : fichiers multiples</h3>
+            <ul><li>Compiler un répertoire d'un coup</li></ul>
+            <p class="sass-color">Sass</p>
+            <pre><code>
+$ sass app/sass:public/stylesheets
+            </code></pre>
+            <p class="stylus-color">Stylus</p>
+            <pre><code>
+$ stylus styl/
+            </code></pre>
+            <aside class="notes">
+                SASS : watch nécessaire <br/>
+                Avec stylus on a juste indiqué le nom du dossier qui contient les .styl, cependant on ne peut pas indiquer le dossier de destination. <br/>
+                LESS ne permet pas cette compilation, la solution serait de créer un fichier .less qui importe tous les fichiers less à compiler.
+            </aside>
+        </section>
+
+        <section>
+            <h3>Les options de compilation : Minify</h3>
+            <ul><li>Minifier ses fichiers de style</li></ul>
+            <p class="less-color">LESS</p>
+            <pre style="margin: 0;"><code>
+$ lessc --clean-css input.less ouput.css
+            </code></pre>
+            <p class="sass-color">Sass</p>
+            <pre style="margin: 0;"><code>
+$ sass input.scss output.css --style compressed
+            </code></pre>
+            <p class="stylus-color">Stylus</p>
+            <pre style="margin: 0;"><code>
+$ stylus < input.styl > output.css --compress
+            </code></pre>
+
+            <aside class="notes">
+                Les 3 préprocesseurs permettent de récupérer un fichier css directement minifier.
+            </aside>
+        </section>
+
+        <section>
+            <h2>3. Comparaison*</h2>
+            <div class="col-3 right">
+                <p class="sass-color">Sass (2006)</p>
+                <p><span class="num">371</span> <img class="octicon" src="/images/octicon-eye-watch.png"/> </p>
+                <p><span class="num">3 912</span> <img class="octicon" src="/images/octicon-star.png"/> </p>
+                <p><span class="num">722</span> <img class="octicon" src="/images/octicon-fork.png"/> </p>
+            </div>
+
+            <div class="col-3 right">
+                <p class="less-color">LESS (Fév. 2010)</p>
+                <p><span class="num">606</span> <img class="octicon" src="/images/octicon-eye-watch.png"/> </p>
+                <p><span class="num">10 627</span> <img class="octicon" src="/images/octicon-star.png"/> </p>
+                <p><span class="num">2 367</span> <img class="octicon" src="/images/octicon-fork.png"/> </p>
+            </div>
+
+            <div class="col-3 right">
+                <p class="stylus-color">Stylus (Déc. 2010)</p>
+                <p><span class="num">225</span> <img class="octicon" src="/images/octicon-eye-watch.png"/> </p>
+                <p><span class="num">4 464</span> <img class="octicon" src="/images/octicon-star.png"/> </p>
+                <p><span class="num">621</span> <img class="octicon" src="/images/octicon-fork.png"/> </p>
+            </div>
+
+            <div class="fragment">
+                <div class="col-3 right">
+                    <p>Issues :</p>
+                    <p><span class="num">116</span> Open</p>
+                    <p><span class="num">1 177</span> Closed</p>
+                </div>
+
+                <div class="col-3 right">
+                    <p>Issues :</p>
+                    <p><span class="num">250</span> Open</p>
+                    <p><span class="num">1 815</span> Closed</p>
+                </div>
+
+                <div class="col-3 right">
+                    <p>Issues :</p>
+                    <p><span class="num">168</span> Open</p>
+                    <p><span class="num">1 426</span> Closed</p>
+                </div>
+                <p class="footnote">* Données récupérées le 21/06/14</p>
+            </div>
+        </section>
+
+        <section>
+            <img src="gif/dino_toystory.gif" class="big_gif">
+        </section>
+
+
+        <section>
+            <h2>B. Les préprocesseurs Javascript</h2>
+        </section>
+
+        <section>
+            <h2>CoffeeScript</h2>
+            <aside class="notes">
+            CoffeeScript est le préprocesseur Javascript le plus utilisé, il permet d'améliorer la lisibilité du Javascript, en écrivant du code simple et est surtout moins verbeux
+            </aside>
+        </section>
+
+        <section>
+            <h2>1. Syntaxe</h2>
+
+            <div class="col-2">
+                <span>JavaScript</span>
+                <ul>
+                    <li>" ; " oublié ? <br/>
+                        <span class="red fragment">=> erreur</span>
+                    </li>
+                    <li class="fragment">" { " ou " } " oublié ? <br/>
+                        <span class="red fragment">=> erreur</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-2 fragment">
+                <span>CoffeeScript</span>
+                <p class="complementary">Besoin d'aucun des deux</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Syntaxe</h2>
+            <div class="col-2">
+                <span>JavaScript</span>
+                <pre><code style="font-size:0.9em;">doClick = function(e) {
+  return console.log(e.index);
+};</code></pre>
+            </div>
+            <div class="col-2">
+                <span>CoffeeScript</span>
+            <pre><code style="font-size:0.9em;">doClick = (e) ->
+    console.log(e.index)</code></pre>
+            </div>
+            <div class="fragment">
+                <div class="col-2" style="font-size:0.9em;">
+                    <pre><code>var math;
+math = {
+  square: function(x) {
+    return Math.sqrt(x);
+  },
+  cube: function(x) {
+    return x * square(x);
+  }
+};
+alert("Three cubed is " + (math.cube(3)));</code></pre>
+                </div>
+                <div class="col-2" style="font-size:0.9em;">
+                    <pre><code>math =
+    square: (x) -> Math.sqrt x
+    cube:   (x) -> x * square x
+alert "Three cubed is #{math.cube 3}"</code></pre>
+                </div>
+            </div>
+            <div class="fragment">
+                <div class="col-2" style="font-size:0.9em;">
+                    <pre><code style="font-size:0.9em;">if (typeof joli !=="undefined" && joli !==null) {
+    alert("I knew it!");
+}</code></pre>
+                </div>
+                <div class="col-2" style="font-size:0.9em;">
+                    <pre><code style="font-size:0.9em;">alert "I knew it!" if joli?
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Syntaxe</h2>
+            <div class="col-3">
+                <p>JavaScript</p>
+                <ul class="scripts">
+                    <li>===</li>
+                    <li>!==</li>
+                    <li>!</li>
+                    <li>&&</li>
+                    <li>||</li>
+                    <li>true</li>
+                    <li>false</li>
+                </ul>
+            </div>
+            <div class="col-3" style="width:18%;">
+                <p style="color:#171717;">Hello</p>
+                <ul class="scripts">
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                    <li><img src="images/arrow.png" width="120px" style="margin:0;" /></li>
+                </ul>
+            </div>
+            <div class="col-3">
+                <p>CoffeeScript</p>
+                <ul class="scripts">
+                    <li>is</li>
+                    <li>isnt</li>
+                    <li>not</li>
+                    <li>and</li>
+                    <li>or</li>
+                    <li>true, yes, on</li>
+                    <li>false, no, off</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Compilation</h2>
+            <div class="left">
+                <ul> <li>Compilation d'un simple fichier CoffeeScript</li></ul>
+                <pre><code style="padding: 15px 10px;">$ coffee --compile --output js/ chocolate.coffee</code></pre>
+            </div>
+            <div class="fragment left">
+                <ul><li>Compilation d'un répertoire CoffeeScript</li></ul>
+                <pre><code style="padding: 15px 10px;">$ coffee --compile --output js/ coffeedir/</code></pre>
+            </div>
+            <div class="fragment left">
+                <ul><li>Compilation automatique</li></ul>
+                <pre><code style="padding: 15px 10px;">$ coffee --watch --compile chocolate.coffee</code></pre>
+            </div>
+            <div class="fragment left">
+                <ul><li>Compilation d'un répertoire en un seul fichier JS</li></ul>
+                <pre><code style="padding: 15px 10px;">$ coffee --join js/project.js --compile coffee/</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Récapitulatif</h3>
+            <ul>
+                <li>Code dynamique</li>
+                <li>Code découplé</li>
+                <li>Nombre de requêtes diminué</li>
+                <li>Moins verbeux</li>
+                <li>Meilleure maintenabilité</li>
+            </ul>
+        </section>
+
+        <section>
+            <img src="gif/good_boy.gif" class="big_gif">
+        </section>
+
+        <section>
+            <h3>Mais...</h3>
+            Beaucoup de commandes
+            <aside class="notes">
+                Comme vous avez pu le voir, beaucoup de bons outils existent, mais l'implémentation correcte de chacune peut être long et difficile
+                Il faut connaître la commande pour chaque compilation, et en plus la taper à chaque fois qu'on fait des modifications
+                Ce qui peut être fastidieux,
+                Mais les outils d'automatisation sont là pour ça ! Et rendent ces processus facile et rapide! (Gif superhéros ?)
+            </aside>
+        </section>
+
+        <section>
+            <h2>II. Les outils d'automatisation</h2>
+        </section>
+
+        <section>
+            <h2>A. Assetic</h2>
+
+            <aside class="notes">
+                Assetic est un framework de gestion d'assets qui a été créé par Kris Wallsmith en 2011 et bien sûr open source
+            </aside>
+        </section>
+
+        <section>
+            <h3>1. Fonctionnalités</h3>
+            <ul>
+                <li>Gestion des ressources</li>
+                <li>Utilisation de filtres</li>
+            </ul>
+            <aside class="notes">
+            Les filtres ce sont des processus qui sont appliqués à ces fichiers avant d'être lu par le navigateur
+            </aside>
+        </section>
+
+        <section>
+            <h3>Gestion des ressources</h3>
+            <ul>
+                <li>Ajouter un dossier complet</li>
+                <li>Combiner des fichiers</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Les filtres</h3>
+            <ul>
+                <li>Réécrire vos liens relatifs : cssrewrite</li>
+                <li>Minifier vos ressources : cssmin</li>
+                <li>Compiler vos fichiers: coffee, etc. </li>
+            </ul>
+            <aside class="notes">
+                Une fois qu'elles sont gérées par Assetic, vous pouvez appliquer des filtres à vos ressources avant qu'elles ne soient servies.
+
+                cssrewrite: Quand assetic gère les ressources, il les sert depuis un autre endroit, du coup les chemin relatifs de vos images ou autres sources sont cassés.
+                cssrewrite permet de réparer ces liens.
+            </aside>
+        </section>
+
+        <section>
+            <h3>2. Exemple d'utilisation</h3>
+            <h4>CSS</h4>
+
+            <pre><code>{% stylesheets
+    'bundles/event/css/event.css'
+    'bundles/event/css/buttons.css'
+    'bundles/event/css/main.css'
+    filter='cssrewrite'
+    filter='cssmin'
+    output='css/generated/layout.css'
+%}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}</code></pre>
+            <div class="fragment">
+                Un exemple de code généré :
+                <pre><code>
+<link rel="stylesheet" href="/app_dev.php/css/all_main1.css" type="text/css" />
+                </code></pre>
+            </div>
+            <aside class="notes">
+                Le asset_url est l'url généré des fichiers css compilés
+            </aside>
+        </section>
+
+        <section>
+            <h3>Exemple d'utilisation</h3>
+            <h4>Javascript</h4>
+
+                <pre><code>
+{% javascripts
+    '@AcmeFooBundle/Resources/public/coffee/*'
+    '@SiteBundle/Resources/public/coffee/form.coffee'
+    output='js/compiled/main.js'
+    filter='coffee' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>3. Configuration</h3>
+            Le fichier config.yml
+            <pre><code>
+# app/config/config.yml
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        ['AcmeFooBundle', 'SiteBundle']
+    filters:
+        sass: ~
+        compass: ~
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>4. Commandes</h3>
+            <ul>
+                <li>
+                Copie les liens symboliques des assets référencées dans web
+                    <pre><code>
+$ php app/console asset:install web -symlink
+                </code></pre>
+                </li>
+                <li class="fragment">
+                Génère automatiquement les ressources nécessaires
+                    <pre><code>
+$ php app/console assetic:dump --watch
+                    </code></pre>
+                </li>
+                <li class="fragment">
+                Génère les ressources pour la prod
+                    <pre><code>
+$ php app/console assetic:dump --env=prod --no-debug
+                    </code></pre>
+                </li>
+            </ul>
+
+            <aside class="notes">
+                asset install : va copier les liens symboliques des asset référencées dans web.
+            </aside>
+        </section>
+
+
+        <section>
+            <h2>B. Grunt</h2>
+            <img class="none" src="images/grunt_logo.png"/>
+            <aside class="notes">
+                Grunt est un gestionnaire de tâches qui a été créé en 2011 et qui peut être écrit en Js ou CoffeeScript
+                Need Node.JS
+            </aside>
+        </section>
+
+        <section>
+            <h3>1. Installation</h3>
+            Grunt
+            <pre><code>
+$ npm install -g grunt
+$ npm install -g grunt-cli
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>2. Fonctionnalités</h3>
+            <ul>
+                <li>Minifier vos fichiers</li>
+                <li>Compiler automatiquement</li>
+                <li>Gérer votre proxy livereload</li>
+                <li>Optimiser vos images</li>
+                <li>Concaténation de fichiers</li>
+                <li>Lancer des tâches automatiquement</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>3. Les principaux plugins</h3>
+            <ul class="left">
+                <li><span class="red">sass</span> : permet la compilation de sass/scss en CSS</li>
+                <li><span class="red">watch</span> : permet de lancer des tâches automatiquement</li>
+                <li><span class="red">jshint</span> : permet de détecter les erreurs potentiels de son code JavaScript</li>
+                <li><span class="red">clean</span> : permet de supprimer des fichiers et dossiers</li>
+                <li><span class="red">css-min</span> : permet de concaténer et minifier les fichiers CSS</li>
+                <li><span class="red">uglify</span> : permet de concaténer et minifier les fichiers JS</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>4. Fichiers nécessaires</h3>
+            <ol>
+                <li><span class="red">package.json</span> : liste les dépendances</li>
+                <li><span class="red">Gruntfile.js</span> (ou Gruntfile.coffee) : charge les modules et configure les tâches à exécuter</li>
+            </ol>
+        </section>
+
+        <section>
+            <h3>package.json</h3>
+            <div>
+            <pre><code>{
+    "name": "My badass project",
+    "description": "Des poneys et des petits coeurs partout partout"
+    "version": "0.0.1",
+    "author": "Claire COLOMA",
+
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.6.4",
+        "grunt-contrib-cssmin": "~0.4.1",
+        "grunt-contrib-uglify": "~0.2.4",
+        "grunt-contrib-watch": "~0.5.3",
+    },
+}</code></pre>
+            <pre><code class="fragment">
+$ npm install
+            </code></pre>
+            </div>
+            <aside class="notes">
+                Le fichier package.json contient les données principales de votre projet
+                Nom du projet + Auteur + Version + Description
+                Et entre autre les dépendances, dont celle de grunt
+                Il faut donc en informer ces informations :
+                Une fois ces infos renseignées, il faut ensuite les installer avec le npm installl
+            </aside>
+        </section>
+
+
+
+        <section>
+            <h3>Créer un Gruntfile.js : Structure</h3>
+            <pre><code>
+module.exports = function(grunt) {
+    // Importation des différents modules grunt
+    grunt.loadNpmTasks('grunt-plugin');
+
+    // Configuration des plugins
+    grunt.initConfig({});
+
+    // Déclaration des différentes tâches
+    grunt.registerTask('default', ['tache1', 'tache2']);
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Gruntfile.js : Importation des plugins</h3>
+            <pre><code>
+module.exports = function(grunt) {
+    // Importation des différents modules grunt
+    grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+};
+            </code></pre>
+            <div class="fragment">
+                <pre><code>
+module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
+};
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Gruntfile.js : Configuration des plugins</h3>
+            <pre><code>module.exports = function(grunt) {
+    grunt.initConfig({
+        coffee: {
+            compile: {
+                files: {
+                  'js/ouput1.js': 'coffee/input1.coffee',
+                  'js/ouput2.js': 'coffee/input2.coffee'
+                }
+            }
+        },
+
+        sass: {
+            dist: {
+                options : {
+                    style: 'compressed'
+                },
+                files: {
+                    'css/ouput1.css': 'scss/input1.scss',
+                    'css/output2.css': 'scss/input2.scss'
+                }
+            }
+        },
+
+        watch: {
+            css: {
+                files: ['scss/*.scss'],
+                tasks: ['sass'],
+            }
+            script: {
+                files: ['coffee/*.coffee'],
+                tasks: ['coffee']
+            }
+        }
+    });
+};</code></pre>
+        </section>
+
+
+
+        <section>
+            <h3>Gruntfile.js : Déclaration des tâches</h3>
+            <pre><code>module.exports = function(grunt) {
+    // Déclaration des tâches
+    grunt.registerTask('compress', ['sass', 'coffee']);
+    grunt.registerTask('default', ['compress', 'watch']);
+    grunt.registerTask( 'serve', [ 'connect', 'watch'] );
+};</code></pre>
+            <div class="fragment">On tape ensuite la commande :
+            <pre><code>
+$ grunt [task-name]
+            </code></pre> </div>
+            <aside class="notes">
+                Il doit toujours y avoir au moins la tâche "default"
+            </aside>
+        </section>
+
+        <section>
+            <h3>5. Pourquoi Grunt est meilleur qu'Assetic ?</h3>
+            <ul>
+                <li>Découpler Application / Gestion des ressources</li>
+                <li>Plus de fonctionnalités</li>
+                <li>Lancement de tâches séparées</li>
+                <li>Plus simple</li>
+            </ul>
+        </section>
+
+        <section>
+            <img src="gif/will_carlton-danse.gif" class="big_gif">
+        </section>
+
+        <section>
+            <h2>C. Gulp</h2>
+            <img class="none" src="images/gulp_logo.png"/>
+            <aside class="notes">
+                Gulp permet aussi de gérer des tâches, le projet a commencé il y a moins d'un an (juillet 2013)
+            </aside>
+        </section>
+
+        <section>
+            <h3>1. Différences Grunt / Gulp ?</h3>
+            <ul>
+                <li>Approche Code et pas Config</li>
+                <li>Asynchrone</li>
+                <li>Plus rigoureux avec les plugins</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Différences Grunt/Gulp ?</h3>
+            <div class="col-2">
+            Grunt
+                <pre><code  style="font-size:0.9em;">module.exports = function(grunt) {
+    grunt.initConfig({
+        sass: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'css/theme/source/',
+                    src: ['*.scss'],
+                    dest: 'css/theme/',
+                    ext: '.css'
+                }]
+            }
+        },
+
+        watch: {
+            css: {
+                files: ['scss/*.scss'],
+                tasks: ['sass'],
+            }
+        }
+    });
+
+    // Importation des différents modules grunt
+    require('load-grunt-tasks')(grunt);
+
+    // Déclaration des tâches
+    grunt.registerTask('default', ['sass','watch']);
+};</code></pre>
+            </div>
+            <div class="col-2 fragment">
+            Gulp
+                <pre><code>var gulp = require ('gulp');
+
+// Importation des plugins
+var sass = require('gulp-sass');
+var cssmin = require('gulp-cssmin');
+
+// Traitement des tâches
+gulp.task('sass', function () {
+    gulp.src('scss/*.scss')
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(gulp.dest('css/'))
+        .pipe(rename({suffix:'.min'}))
+        .pipe(cssmin())
+        .pipe(gulp.dest('css/'))
+});
+
+
+gulp.task('watch', function() {
+    gulp.watch('scss/*.scss', ['sass']);
+})
+
+gulp.task('default', ['sass', 'watch']);</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Gulp est asynchrone</h3>
+            Gulp utilise des streams
+            <div>
+                Sans stream :
+                <img src="images/gulp_stream_pipe-01.png"/>
+            </div>
+
+            <div>
+                Avec stream :
+                <img src="images/gulp_stream_pipe-02.png"/>
+            </div>
+
+        </section>
+
+        <section>
+            <h3>2. Installation</h3>
+            <ul>
+                <li>Gulp sur la machine :
+                    <pre><code>
+$ npm install -g gulp
+                    </code></pre>
+                </li>
+                <li>Initialisation dans le projet :
+                    <pre><code>
+$ npm install gulp --save-dev
+                    </code></pre>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>3. Fichiers nécessaires</h3>
+            <ol>
+                <li><span class="red">package.json</span> : liste les dépendances</li>
+                <li><span class="red">gulpfile.js</span> : charge les modules et traite les tâches à effectuer</li>
+            </ol>
+        </section>
+
+        <section>
+            <h3>package.json</h3>
+            <div>
+            <pre><code>{
+    "devDependencies": {
+        "gulp": "~3.6.2",
+        "gulp-connect": "~2.0.5",
+        "gulp-jshint": "~1.6.1",
+        "gulp-sass": "~0.7.1",
+        "gulp-plumber": "~0.6.2",
+    },
+}</code></pre>
+
+            <pre><code class="fragment">
+$ npm install
+            </code></pre>
+            </div>
+            <aside class="notes">
+                Le fichier package.json contient les données principales de votre projet
+                Nom du projet + Auteur + Version + Description
+                Et entre autre les dépendances, dont celle de grunt
+                Il faut donc en informer ces informations :
+                Chaque fois qu'un plugins est installer sa version est renseignée ici
+            </aside>
+        </section>
+
+        <section>
+            <h3>Créer un gulpfile.js : Structure</h3>
+            <pre><code>
+// Importation de l'API
+var gulp = require ('gulp');
+
+// Importation des plugins
+var task = require('gulp-task');
+
+// Traitement des tâches
+gulp.task('default', ['task1', 'task2']);
+            </code></pre>
+            <div class="fragment">On tape ensuite la commande :
+            <pre><code>
+$ gulp [task-name]
+            </code></pre> </div>
+        </section>
+
+        <section>
+            <h3>4. Les tasks</h3>
+            <ul class="left">
+                <li><span class="red">plumber</span> : permet de réparer les pipes foireux</li>
+                <li><span class="red">notify</span> : permet d'être notifié sur son terminal</li>
+                <li><span class="red">rename</span> : permet de renommer un fichier</li>
+            </ul>
+            <aside class="notes">
+                Node a un process qui fait que le streaming pête à la moindre erreur
+                Ce qui n'est pas pratique quand on watch par ex.
+            </aside>
+
+        </section>
+
+        <section>
+            <h2>D. Bower</h2>
+            <img class="none" src="images/bower_logo.png" />
+        </section>
+
+        <section>
+            <h2>Bower ça sert à quoi ?</h2>
+            <ul>
+                <li>Un gestionnaire de dépendances front-end
+                    <ul>
+                        <li>Underscore.js</li>
+                        <li>AngularJS</li>
+                        <li>Modernizr</li>
+                        <li>jQuery</li>
+                        <li>Backbone.js</li>
+                        <li>etc...</li>
+                    </ul>
+                </li>
+
+                <li class="fragment">= composer.phar</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Installation d'un composant</h2>
+            <ul>
+                <li>
+                    <pre><code>$ bower install package-name
+                    </code></pre>
+                </li>
+                <li>D'une version précise
+                    <pre><code>
+$ bower install package-name#version
+                    </code></pre>
+                </li>
+                <li class="fragment">D'un dépôt Git
+                    <pre><code>
+$ bower install https://github.com/user-name/package-name
+                    </code></pre>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Fichiers nécessaires</h3>
+            <ol>
+                <li><span class="red">.bowerrc</span> : indique le dossier où seront stockés les composants</li>
+                <li><span class="red">bower.json</span> : liste les dépendances</li>
+            </ol>
+        </section>
+
+        <section>
+            <h3>.bowerrc</h3>
+            Répertoire des composants
+            <pre><code>
+{
+  "directory": "vendor/bower_components"
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>bower.json</h3>
+            Liste des versions des composants
+            <pre><code>{
+    "name": "My badass project",
+    "description": "Des poneys et des petits coeurs partout partout"
+    "version": "0.0.1",
+    "author": "Claire COLOMA",
+    },
+
+    "dependencies": {
+        "angular": "~1.2.13",
+        "modernizr": "~2.6.2",
+        "moment": "~2.4.0",
+        "underscore": "~1.4.4",
+    },
+} </code></pre>
+        </section>
+
+        <section>
+            <h3>Utilisation d'un paquet</h3>
+            Ajouter le composant manuellement dans son code :
+            <pre><code>
+<script src="vendor/bower_components/jquery/jquery.js"></script>
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Mettre à jour un paquet</h3>
+            <pre><code>
+$ bower update package-name
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+            <ul>
+                <li>Utilisez les outils d'industrialisation <span class="red">nécessaires</span> à vos projets</li>
+                <li>Regroupez vos tâches</li>
+                <li>Grunt va introduire les streams</li>
+                <li>Yeoman</li>
+                <li>Automatisez :)</li>
+            </ul>
+            <aside class="notes">
+                Yeoman est un outil de scaffolding permettant de mettre en place rapidement vos projets. Yeoman s’occupe de créer l’architecture de votre projet, configurer Grunt avec les tâches essentielles, initialiser Bower, tout pour bien démarrer votre projet.
+            </aside>
+        </section>
+
+        <section>
+            <h1>Merci !</h1>
+            <p>Claire COLOMA / @_ClaireColoma
+            <a href="http://jolicode.github.io/phptourconf-tools">http://jolicode.github.io/phptourconf-tools</a>
+        </section>
+    </div>
+
+</div>
+
+<footer class="joli">
+    Assez(tic) de perdre du temps, automatisez ! Grrr ! - PHP Tour Lyon 2014 - <a href="http://jolicode.com/"><img src="lib/font/logo-fond-noir.svg" style="height:1em; vertical-align: text-bottom;" /></a> - <a href="http://twitter.com/_ClaireColoma" target="_blank">@_ClaireColoma</a>
+</footer>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
