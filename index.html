@@ -437,7 +437,7 @@ $ stylus styl/
             <ul><li>Minifier ses fichiers de style</li></ul>
             <p class="less-color">LESS</p>
             <pre style="margin: 0;"><code>
-$ lessc --clean-css input.less ouput.css
+$ lessc --clean-css input.less output.css
             </code></pre>
             <p class="sass-color">Sass</p>
             <pre style="margin: 0;"><code>
@@ -875,7 +875,7 @@ $ npm install
                 Nom du projet + Auteur + Version + Description
                 Et entre autre les dépendances, dont celle de grunt
                 Il faut donc en informer ces informations :
-                Une fois ces infos renseignées, il faut ensuite les installer avec le npm installl
+                Une fois ces infos renseignées, il faut ensuite les installer avec le npm install
             </aside>
         </section>
 
@@ -924,8 +924,8 @@ module.exports = function(grunt) {
         coffee: {
             compile: {
                 files: {
-                  'js/ouput1.js': 'coffee/input1.coffee',
-                  'js/ouput2.js': 'coffee/input2.coffee'
+                  'js/output1.js': 'coffee/input1.coffee',
+                  'js/output2.js': 'coffee/input2.coffee'
                 }
             }
         },
@@ -936,7 +936,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'css/ouput1.css': 'scss/input1.scss',
+                    'css/output1.css': 'scss/input1.scss',
                     'css/output2.css': 'scss/input2.scss'
                 }
             }
@@ -1158,7 +1158,7 @@ $ gulp [task-name]
                 <li><span class="red">rename</span> : permet de renommer un fichier</li>
             </ul>
             <aside class="notes">
-                Node a un process qui fait que le streaming pête à la moindre erreur
+                Node a un process qui fait que le streaming pète à la moindre erreur
                 Ce qui n'est pas pratique quand on watch par ex.
             </aside>
 
